@@ -18,7 +18,7 @@ interface Feature {
     description: string;
     benefits: string[];
     mockup: string;
-    color: 'default' | 'secondary' | 'success';
+    color: 'default' | 'secondary' | 'success'; // Keep for UI styling, not for buttons
 }
 
 const FeaturesSection = () => {
@@ -32,7 +32,7 @@ const FeaturesSection = () => {
             icon: Zap,
             description: 'Rasakan pengalaman ujian yang sesungguhnya dengan sistem tryout yang dirancang sama persis dengan tes CAT sesungguhnya.',
             benefits: [
-              'Materi & soal terbaru', 'Analisis hasil otomatis', 'Simulasi ujian mirip asli'
+                'Materi & soal terbaru', 'Analisis hasil otomatis', 'Simulasi ujian mirip asli'
             ],
             mockup: '/images/illustrations/marketing/features-asset-1.svg',
             color: 'default'
@@ -49,8 +49,8 @@ const FeaturesSection = () => {
                 'Tingkat kesulitan bervariasi (mudah, sedang, sulit)',
                 'Termasuk pembahasan detail & kunci jawaban'
             ],
-            mockup: '/images/illustrations/marketing/features-asset-2.svg', // Ganti dengan gambar yang sesuai
-            color: 'secondary' // Warna yang menonjol
+            mockup: '/images/illustrations/marketing/features-asset-2.svg',
+            color: 'secondary'
         },
         {
             id: 'peringkat',
@@ -65,6 +65,8 @@ const FeaturesSection = () => {
     ];
 
     const activeFeatureData = features.find(f => f.id === activeFeature) || features[0];
+
+    // ✅ FIXED: Use color for UI elements only, not button variants
     const activeColorName = activeFeatureData.color === 'default' ? 'primary' : activeFeatureData.color;
 
     const tabColorClasses = {
@@ -94,13 +96,11 @@ const FeaturesSection = () => {
               </Animate>
 
               <div className="max-w-7xl mx-auto">
-                  {/* Feature Navigation - Mobile adaptation only */}
+                  {/* Feature Navigation - Keep color styling for visual distinction */}
                   <Animate animation="fadeInUp" delay={0.2} className="mb-10">
                       <div className="flex justify-center">
                           <Card variant="default" className={cn(
-                            // Mobile: vertical stack, full width with max constraint
                             "flex flex-col items-stretch p-2 space-y-2 w-full max-w-sm",
-                            // Desktop: original horizontal layout
                             "lg:inline-flex lg:flex-row lg:items-center lg:space-y-0 lg:space-x-6 lg:w-auto lg:max-w-none"
                           )}>
                               {features.map((feature) => {
@@ -112,8 +112,7 @@ const FeaturesSection = () => {
                                       key={feature.id}
                                       onClick={() => setActiveFeature(feature.id)}
                                       className={cn(
-                                        'relative flex items-center gap-3 px-5 py-3 rounded-full transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-default',
-                                        // Mobile: center content, full width
+                                        'relative flex items-center gap-3 px-5 py-3 rounded-full transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                                         'justify-center w-full lg:w-auto lg:justify-start',
                                         isActive ? tabColorClasses[feature.color] : 'hover:bg-muted'
                                       )}
@@ -130,15 +129,13 @@ const FeaturesSection = () => {
                       </div>
                   </Animate>
 
-                  {/* Feature Content - Mobile: tabs→image→content, Desktop: original layout */}
+                  {/* Feature Content */}
                   <div className={cn(
-                    // Mobile: flex column (tabs, image, then content)
                     "flex flex-col gap-8",
-                    // Desktop: original grid layout
                     "lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center"
                   )}>
 
-                      {/* Visual Mockup - First after tabs on mobile, first on desktop (original) */}
+                      {/* Visual Mockup */}
                       <Animate
                         animation="slideInLeft"
                         delay={0.3}
@@ -153,7 +150,7 @@ const FeaturesSection = () => {
                           />
                       </Animate>
 
-                      {/* Content Description - Second on mobile (below image), second on desktop (original) */}
+                      {/* Content Description */}
                       <Animate animation="slideInRight" delay={0.4} className="order-2 lg:order-2 space-y-8">
                           <div className="space-y-4">
                               <Heading as="h3" size="display-sm" className="leading-tight">
@@ -176,8 +173,14 @@ const FeaturesSection = () => {
                               ))}
                           </div>
 
+                          {/* ✅ FIXED: Always use primary brand button for consistency */}
                           <Animate animation="fadeInUp" delay={0.4} className="pt-4">
-                              <Button size="lg" variant={activeFeatureData.color} animation="hover" className="group rounded-full px-8">
+                              <Button
+                                size="lg"
+                                variant="default"
+                                animation="hover"
+                                className="group rounded-full px-8"
+                              >
                                   Pelajari Lebih Lanjut
                                   <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                               </Button>

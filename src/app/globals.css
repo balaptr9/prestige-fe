@@ -4,69 +4,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================================
+   SISTEM TEMA DAN WARNA - INI YANG PALING PENTING!
+   🚨 JANGAN UBAH SEMBARANGAN - INI YANG NGATUR SEMUA WARNA DI APP
+   ============================================================================ */
 @layer base {
   :root {
-    /* Light Theme */
-    --background: 0 0% 100%;             /* #FFFFFF */
-    --foreground: 222.2 84% 4.9%;      /* #09090B */
-    --card: 0 0% 100%;                   /* #FFFFFF */
-    --card-foreground: 222.2 84% 4.9%; /* #09090B */
-    --popover: 0 0% 100%;                /* #FFFFFF */
-    --popover-foreground: 222.2 84% 4.9%;/* #09090B */
-    --primary: 207 70% 39%;            /* #327498 */
-    --primary-foreground: 210 40% 98%;   /* #F8FAFC */
-    --secondary: 30 80% 60%;           /* #F0A243 */
-    --secondary-foreground: 222.2 84% 4.9%; /* #09090B */
-    --muted: 210 40% 96.1%;              /* #F1F5F9 */
-    --muted-foreground: 215.4 16.3% 46.9%;/* #64748B */
-    --accent: 210 40% 96.1%;             /* #F1F5F9 */
-    --accent-foreground: 222.2 84% 4.9%; /* #09090B */
-    --destructive: 0 84.2% 60.2%;      /* #EF4444 */
-    --destructive-foreground: 210 40% 98%;/* #F8FAFC */
-    --border: 214.3 31.8% 91.4%;       /* #E2E8F0 */
-    --input: 214.3 31.8% 91.4%;        /* #E2E8F0 */
-    --ring: 207 70% 39%;               /* #327498 */
-    --radius: 0.5rem;
+    /* ===== TEMA TERANG (DEFAULT) =====
+       Semua variable ini bakal dipake sama Tailwind di theme.colors
+       Format: HSL tanpa "hsl()" wrapper biar Tailwind bisa pake dengan alpha
+    */
+    --background: 0 0% 100%;             /* #FFFFFF - Background utama */
+    --foreground: 222.2 84% 4.9%;       /* #09090B - Text utama */
+    --card: 0 0% 100%;                   /* #FFFFFF - Background card */
+    --card-foreground: 222.2 84% 4.9%;  /* #09090B - Text di card */
+    --popover: 0 0% 100%;                /* #FFFFFF - Background popup */
+    --popover-foreground: 222.2 84% 4.9%; /* #09090B - Text di popup */
 
-    /* Custom Properties */
-    --header-height: 4rem;
-    --sidebar-width: 16rem;
-    --content-max-width: 80rem;
+    /* 🎨 BRAND COLORS - INI WARNA UTAMA BRAND KITA */
+    --primary: 207 70% 39%;              /* #327498 - Biru teal brand */
+    --primary-foreground: 210 40% 98%;   /* #F8FAFC - Text di atas primary */
+    --secondary: 30 80% 60%;             /* #F0A243 - Orange brand */
+    --secondary-foreground: 222.2 84% 4.9%; /* #09090B - Text di atas secondary */
 
-    /* Theme Transition Properties */
+    /* 🎨 WARNA PENDUKUNG */
+    --muted: 210 40% 96.1%;              /* #F1F5F9 - Background section abu-abu */
+    --muted-foreground: 215.4 16.3% 46.9%; /* #64748B - Text abu-abu */
+    --accent: 210 40% 96.1%;             /* #F1F5F9 - Warna aksen */
+    --accent-foreground: 222.2 84% 4.9%; /* #09090B - Text di atas aksen */
+    --destructive: 0 84.2% 60.2%;       /* #EF4444 - Merah buat error/hapus */
+    --destructive-foreground: 210 40% 98%; /* #F8FAFC - Text di atas merah */
+    --border: 214.3 31.8% 91.4%;        /* #E2E8F0 - Warna border */
+    --input: 214.3 31.8% 91.4%;         /* #E2E8F0 - Border input */
+    --ring: 207 70% 39%;                 /* #327498 - Warna focus ring */
+    --radius: 0.5rem;                    /* Border radius default */
+
+    /* 📐 LAYOUT VARIABLES - Ukuran komponen utama */
+    --header-height: 4rem;               /* 64px - Tinggi header */
+    --sidebar-width: 16rem;              /* 256px - Lebar sidebar */
+    --content-max-width: 80rem;          /* 1280px - Lebar konten maksimal */
+
+    /* ⚡ TEMA TRANSITION - Biar ganti tema smooth */
     --theme-transition-duration: 300ms;
     --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* ===== TEMA GELAP =====
+     Override warna buat dark mode. Yang gak ditulis disini tetep pake dari :root
+     🌙 Dark mode: background jadi gelap, foreground jadi terang
+  */
   .dark {
-    /* Dark Theme */
-    --background: 222.2 84% 4.9%;      /* #09090B */
-    --foreground: 210 40% 98%;         /* #F8FAFC */
-    --card: 222.2 84% 4.9%;            /* #09090B */
-    --card-foreground: 210 40% 98%;   /* #F8FAFC */
-    --popover: 222.2 84% 4.9%;         /* #09090B */
-    --popover-foreground: 210 40% 98%;/* #F8FAFC */
-    --primary: 207 70% 39%;            /* #327498 */
-    --primary-foreground: 210 40% 98%;   /* #F8FAFC */
-    --secondary: 30 80% 60%;           /* #F0A243 */
-    --secondary-foreground: 210 40% 98%;   /* #F8FAFC */
-    --muted: 217.2 32.6% 17.5%;        /* #1E293B */
-    --muted-foreground: 215 20.2% 65.1%;/* #94A3B8 */
-    --accent: 217.2 32.6% 17.5%;        /* #1E293B */
-    --accent-foreground: 210 40% 98%;   /* #F8FAFC */
-    --destructive: 0 62.8% 30.6%;      /* #991B1B */
-    --destructive-foreground: 210 40% 98%;/* #F8FAFC */
-    --border: 217.2 32.6% 17.5%;        /* #1E293B */
-    --input: 217.2 32.6% 17.5%;        /* #1E293B */
-    --ring: 207 70% 39%;               /* #327498 */
+    --background: 222.2 84% 4.9%;       /* #09090B - Background gelap */
+    --foreground: 210 40% 98%;          /* #F8FAFC - Text terang */
+    --card: 222.2 84% 4.9%;             /* #09090B - Card gelap */
+    --card-foreground: 210 40% 98%;     /* #F8FAFC - Text card terang */
+    --popover: 222.2 84% 4.9%;          /* #09090B - Popup gelap */
+    --popover-foreground: 210 40% 98%;  /* #F8FAFC - Text popup terang */
+
+    /* Brand colors tetep sama, cuma foreground yang diubah */
+    --primary-foreground: 210 40% 98%;   /* Text di primary tetep putih */
+    --secondary-foreground: 210 40% 98%; /* Text di secondary jadi putih */
+
+    /* Background pendukung disesuaikan buat dark mode */
+    --muted: 217.2 32.6% 17.5%;         /* #1E293B - Abu gelap */
+    --muted-foreground: 215 20.2% 65.1%; /* #94A3B8 - Text abu terang */
+    --accent: 217.2 32.6% 17.5%;        /* #1E293B - Aksen gelap */
+    --accent-foreground: 210 40% 98%;   /* #F8FAFC - Text aksen terang */
+    --destructive: 0 62.8% 30.6%;       /* #991B1B - Merah lebih gelap */
+    --destructive-foreground: 210 40% 98%; /* #F8FAFC - Text tetep putih */
+    --border: 217.2 32.6% 17.5%;        /* #1E293B - Border gelap */
+    --input: 217.2 32.6% 17.5%;         /* #1E293B - Input border gelap */
   }
 
+  /* ===== SISTEM TRANSISI TEMA =====
+     Biar ganti dari light ke dark mode jadi smooth, gak langsung "jduk"
+  */
 
-  /* Theme Transition Base */
+  /* Kelas ini ditambah ke <html> buat aktifin transisi */
   html.theme-transitions {
     transition: color-scheme var(--theme-transition-duration) var(--theme-transition-easing);
   }
 
+  /* Semua elemen dapat transisi smooth pas ganti tema */
   html.theme-transitions *,
   html.theme-transitions *::before,
   html.theme-transitions *::after {
@@ -81,14 +100,14 @@
             backdrop-filter var(--theme-transition-duration) var(--theme-transition-easing);
   }
 
-  /* Disable transitions during theme switch to prevent visual glitches */
+  /* Matiin transisi sementara pas lagi ganti tema biar gak glitch */
   html.theme-switching *,
   html.theme-switching *::before,
   html.theme-switching *::after {
     transition: none !important;
   }
 
-  /* Reduce motion for accessibility */
+  /* Buat user yang prefer reduced motion, bikin transisi super cepet */
   @media (prefers-reduced-motion: reduce) {
     html.theme-transitions *,
     html.theme-transitions *::before,
@@ -98,79 +117,80 @@
   }
 }
 
+/* ============================================================================
+   STYLE DASAR - SETTING FUNDAMENTAL BUAT SELURUH APP
+   ============================================================================ */
 @layer base {
+  /* Reset semua element biar pake border-color yang konsisten */
   * {
     @apply border-border;
   }
 
+  /* Body styling - ini yang jadi base semua halaman */
   body {
     @apply bg-background text-foreground font-sans;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1; /* Aktifin ligature buat font yang lebih bagus */
   }
 
-  /* Smooth Scrolling */
+  /* Smooth scrolling - biar scroll halus, bukan loncat-loncat */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom Scrollbar with theme support */
+  /* ===== CUSTOM SCROLLBAR =====
+     Bikin scrollbar yang match sama tema kita
+  */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 8px; /* Scrollbar tipis aja */
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-muted;
+    @apply bg-muted; /* Track pake warna muted */
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full;
+    @apply bg-muted-foreground/30 rounded-full; /* Thumb bulat dengan opacity */
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
+    @apply bg-muted-foreground/50; /* Lebih gelap pas di-hover */
   }
 }
 
+/* ============================================================================
+   KOMPONEN REUSABLE - Class yang bisa dipake berulang-ulang
+   🎯 Ini komponen yang sering dipake, jadi bikin class khusus aja
+   ============================================================================ */
 @layer components {
-  /* Animation Utilities */
+
+  /* ===== UTILITY ANIMASI ===== */
   .animate-in {
-    animation-fill-mode: both;
+    animation-fill-mode: both; /* Animasi tetep ada sebelum dan sesudah */
   }
 
-  .fade-in {
-    @apply animate-fade-in;
-  }
+  /* Shortcut buat animasi yang sering dipake */
+  .fade-in { @apply animate-fade-in; }
+  .fade-in-up { @apply animate-fade-in-up; }
+  .slide-in-left { @apply animate-slide-in-left; }
+  .slide-in-right { @apply animate-slide-in-right; }
+  .scale-in { @apply animate-scale-in; }
 
-  .fade-in-up {
-    @apply animate-fade-in-up;
-  }
-
-  .slide-in-left {
-    @apply animate-slide-in-left;
-  }
-
-  .slide-in-right {
-    @apply animate-slide-in-right;
-  }
-
-  .scale-in {
-    @apply animate-scale-in;
-  }
-
-  /* Layout Utilities */
+  /* ===== UTILITY LAYOUT ===== */
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .section-padding {
-    @apply py-16 md:py-20 lg:py-24;
+    @apply py-16 md:py-20 lg:py-24; /* Padding section yang responsif */
   }
 
   .content-padding {
-    @apply px-4 sm:px-6 lg:px-8;
+    @apply px-4 sm:px-6 lg:px-8; /* Padding konten yang responsif */
   }
 
-  /* Typography Utilities */
+  /* ===== UTILITY TYPOGRAPHY ===== */
+
+  /* Gradient text - teks warna gradient brand */
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
@@ -183,16 +203,20 @@
     @apply bg-gradient-secondary bg-clip-text text-transparent;
   }
 
-  /* Interactive Elements */
+  /* ===== ELEMEN INTERAKTIF ===== */
+
+  /* Base class buat elemen yang bisa di-interact */
   .interactive {
     @apply transition-all duration-300 ease-in-out;
   }
 
   .interactive:hover {
-    @apply transform -translate-y-1;
+    @apply transform -translate-y-1; /* Naik dikit pas di-hover */
   }
 
-  /* Glass Effect with theme support */
+  /* ===== EFEK GLASS/BLUR =====
+     Efek kaca yang ngikutin tema
+  */
   .glass {
     background: hsl(var(--background) / 0.1);
     backdrop-filter: blur(12px);
@@ -200,20 +224,25 @@
   }
 
   .dark .glass {
-    background: hsl(var(--background) / 0.2);
+    background: hsl(var(--background) / 0.2); /* Lebih solid di dark mode */
     border: 1px solid hsl(var(--border) / 0.3);
   }
 
-  /* Card Variants */
+  /* ===== VARIAN CARD ===== */
+
+  /* Card yang naik pas di-hover */
   .card-hover {
     @apply transition-all duration-300 hover:shadow-large hover:-translate-y-1;
   }
 
+  /* Card yang ada efek brand color pas di-hover */
   .card-interactive {
     @apply transition-all duration-300 hover:shadow-colored hover:scale-105;
   }
 
-  /* Button Effects */
+  /* ===== EFEK BUTTON ===== */
+
+  /* Button dengan efek shimmer/kilau */
   .btn-shimmer {
     @apply relative overflow-hidden;
   }
@@ -224,31 +253,35 @@
   }
 
   .btn-shimmer:hover::before {
-    @apply translate-x-full;
+    @apply translate-x-full; /* Shimmer bergerak pas di-hover */
   }
 
-  /* Theme Toggle Specific Styles */
+  /* ===== THEME TOGGLE STYLES =====
+     Style khusus buat tombol ganti tema
+  */
   .theme-toggle-icon {
     transition: all var(--theme-transition-duration) var(--theme-transition-easing);
   }
 
+  /* Icon matahari - muncul di light mode */
   .theme-toggle-icon.sun {
     transform: rotate(0deg) scale(1);
   }
 
   .dark .theme-toggle-icon.sun {
-    transform: rotate(-90deg) scale(0);
+    transform: rotate(-90deg) scale(0); /* Hilang dan putar pas dark mode */
   }
 
+  /* Icon bulan - muncul di dark mode */
   .theme-toggle-icon.moon {
-    transform: rotate(90deg) scale(0);
+    transform: rotate(90deg) scale(0); /* Hilang dan putar di light mode */
   }
 
   .dark .theme-toggle-icon.moon {
-    transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1); /* Muncul pas dark mode */
   }
 
-  /* System theme indicator */
+  /* Indikator buat system theme - titik kecil yang berkedip */
   .system-theme-indicator::after {
     content: '';
     position: absolute;
@@ -273,7 +306,9 @@
     }
   }
 
-  /* Theme preview cards */
+  /* ===== THEME PREVIEW CARDS =====
+     Card buat preview tema di settings
+  */
   .theme-preview {
     border: 2px solid transparent;
     transition: all var(--theme-transition-duration) var(--theme-transition-easing);
@@ -289,7 +324,9 @@
     box-shadow: 0 4px 20px hsl(var(--primary) / 0.25);
   }
 
-  /* Marketing gradient with theme support */
+  /* ===== MARKETING GRADIENT =====
+     Background gradient buat section marketing
+  */
   .marketing-gradient {
     background: linear-gradient(135deg,
     hsl(var(--background)) 0%,
@@ -304,7 +341,9 @@
     hsl(var(--background)) 100%);
   }
 
-  /* Focus states dengan theme support */
+  /* ===== FOCUS STATES =====
+     Style focus yang konsisten dan accessible
+  */
   .focus-visible-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
@@ -312,11 +351,17 @@
   .dark .focus-visible-ring {
     @apply focus-visible:ring-offset-background;
   }
-
 }
 
+/* ============================================================================
+   UTILITY CLASSES - Class bantuan yang spesifik
+   🔧 Utility kecil-kecil yang berguna
+   ============================================================================ */
 @layer utilities {
-  /* Accessibility */
+
+  /* ===== ACCESSIBILITY ===== */
+
+  /* Screen reader only - konten cuma buat screen reader */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -329,12 +374,12 @@
     border: 0;
   }
 
-  /* Focus States */
+  /* ===== FOCUS STATES ===== */
   .focus-outline {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
 
-  /* Responsive Utilities */
+  /* ===== RESPONSIVE UTILITIES ===== */
   .responsive-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
@@ -343,211 +388,105 @@
     @apply mx-4 sm:mx-6 lg:px-8;
   }
 
-  /* Custom animations dengan theme support */
+  /* ===== ANIMASI KEYFRAMES =====
+     Definisi animasi yang dipake di komponen
+  */
+
   @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes fade-in-down {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes fade-in-left {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   @keyframes fade-in-right {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   @keyframes bounce-subtle {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
   }
 
   @keyframes pulse-soft {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
 
   @keyframes gradient-flow {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
   }
 
   @keyframes progress {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 100%;
-    }
+    0% { width: 0%; }
+    100% { width: 100%; }
   }
 
-  /* Theme-specific animations */
+  /* ===== ANIMASI KHUSUS TEMA ===== */
   @keyframes theme-switch-light {
-    from {
-      filter: brightness(0.8) contrast(1.2);
-    }
-    to {
-      filter: brightness(1) contrast(1);
-    }
+    from { filter: brightness(0.8) contrast(1.2); }
+    to { filter: brightness(1) contrast(1); }
   }
 
   @keyframes theme-switch-dark {
-    from {
-      filter: brightness(1.2) contrast(0.8);
-    }
-    to {
-      filter: brightness(1) contrast(1);
-    }
+    from { filter: brightness(1.2) contrast(0.8); }
+    to { filter: brightness(1) contrast(1); }
   }
 
-  /* Utility classes untuk animasi baru */
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
+  /* ===== UTILITY CLASS ANIMASI ===== */
+  .animate-float { animation: float 4s ease-in-out infinite; }
+  .animate-progress { animation: progress 2s ease-out forwards; }
+  .animate-theme-switch-light { animation: theme-switch-light var(--theme-transition-duration) ease-out; }
+  .animate-theme-switch-dark { animation: theme-switch-dark var(--theme-transition-duration) ease-out; }
 
-  .animate-progress {
-    animation: progress 2s ease-out forwards;
-  }
+  /* ===== SHADOW UTILITIES ===== */
+  .shadow-elevation-1 { box-shadow: 0 2px 4px hsl(var(--foreground) / 0.1); }
+  .shadow-elevation-2 { box-shadow: 0 4px 8px hsl(var(--foreground) / 0.1); }
+  .shadow-elevation-3 { box-shadow: 0 8px 16px hsl(var(--foreground) / 0.1); }
+  .shadow-colored { box-shadow: 0 8px 25px hsl(var(--primary) / 0.25); }
+  .shadow-colored-secondary { box-shadow: 0 8px 25px hsl(var(--secondary) / 0.25); }
 
-  .animate-theme-switch-light {
-    animation: theme-switch-light var(--theme-transition-duration) ease-out;
-  }
-
-  .animate-theme-switch-dark {
-    animation: theme-switch-dark var(--theme-transition-duration) ease-out;
-  }
-
-  /* Enhanced shadow dengan theme support */
-  .shadow-elevation-1 {
-    box-shadow: 0 2px 4px hsl(var(--foreground) / 0.1);
-  }
-
-  .shadow-elevation-2 {
-    box-shadow: 0 4px 8px hsl(var(--foreground) / 0.1);
-  }
-
-  .shadow-elevation-3 {
-    box-shadow: 0 8px 16px hsl(var(--foreground) / 0.1);
-  }
-
-  .shadow-colored {
-    box-shadow: 0 8px 25px hsl(var(--primary) / 0.25);
-  }
-
-  .shadow-colored-secondary {
-    box-shadow: 0 8px 25px hsl(var(--secondary) / 0.25);
-  }
-
-  /* Drop shadow enhancement */
+  /* Drop shadow yang lebih kuat */
   .drop-shadow-3xl {
     filter: drop-shadow(0 35px 35px hsl(var(--foreground) / 0.25));
   }
 
-  /* Enhanced utility classes */
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in-down {
-    animation: fade-in-down 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in-left {
-    animation: fade-in-left 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in-right {
-    animation: fade-in-right 0.6s ease-out forwards;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.4s ease-out forwards;
-  }
-
-  .animate-bounce-subtle {
-    animation: bounce-subtle 2s ease-in-out infinite;
-  }
-
-  .animate-pulse-soft {
-    animation: pulse-soft 2s ease-in-out infinite;
-  }
-
+  /* ===== UTILITY CLASS ANIMASI YANG SIAP PAKAI ===== */
+  .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+  .animate-fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
+  .animate-fade-in-left { animation: fade-in-left 0.6s ease-out forwards; }
+  .animate-fade-in-right { animation: fade-in-right 0.6s ease-out forwards; }
+  .animate-scale-in { animation: scale-in 0.4s ease-out forwards; }
+  .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+  .animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
   .animate-gradient-flow {
     animation: gradient-flow 3s ease-in-out infinite;
     background-size: 200% 200%;
   }
 
-  /* Gradient text dengan theme support */
+  /* ===== GRADIENT TEXT ANIMASI ===== */
   .gradient-text-animated {
-    background: linear-gradient(
-            90deg,
-            hsl(var(--primary)),
-            hsl(var(--secondary)),
-            hsl(var(--primary))
-    );
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)));
     background-size: 200% 100%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -555,7 +494,9 @@
     animation: gradient-flow 3s ease-in-out infinite;
   }
 
-  /* Delay classes */
+  /* ===== DELAY CLASSES =====
+     Buat stagger animasi (animasi berurutan)
+  */
   .animation-delay-100 { animation-delay: 100ms; }
   .animation-delay-200 { animation-delay: 200ms; }
   .animation-delay-300 { animation-delay: 300ms; }
@@ -567,7 +508,9 @@
   .animation-delay-900 { animation-delay: 900ms; }
   .animation-delay-1000 { animation-delay: 1000ms; }
 
-  /* High contrast mode support */
+  /* ===== HIGH CONTRAST MODE =====
+     Buat user yang butuh contrast tinggi (accessibility)
+  */
   @media (prefers-contrast: high) {
     .glass {
       background: hsl(var(--background) / 0.95);
@@ -579,7 +522,32 @@
     }
 
     .focus-visible-ring {
-      @apply ring-4;
+      @apply ring-4; /* Focus ring lebih tebal */
     }
   }
 }
+
+/* ============================================================================
+   📝 CATATAN PENTING BUAT DEVELOPER SELANJUTNYA:
+
+   1. 🎨 WARNA: Semua warna ada di :root dan .dark - jangan hardcode warna!
+   2. 🌓 TEMA: Pake class .theme-transitions di <html> buat smooth transition
+   3. 📱 RESPONSIVE: Semua utility udah responsive, pake yang ada aja
+   4. ♿ ACCESSIBILITY: Udah ada focus states dan reduced motion support
+   5. 🎭 ANIMASI: Pake class animate-* yang udah ada, jangan bikin baru
+   6. 🔧 UTILITY: Kalo butuh utility baru, tambahin di @layer utilities
+   7. 📐 LAYOUT: Pake CSS variables buat layout (--header-height, dll)
+   8. 🎪 GLASS EFFECT: Pake class .glass buat backdrop blur yang konsisten
+
+   Yang BOLEH diubah:
+   - Tambah animasi baru di @keyframes
+   - Tambahin utility class di @layer utilities
+   - Ubah nilai di :root (tapi hati-hati!)
+
+   Yang JANGAN diubah:
+   - Struktur CSS variables di :root
+   - Sistem tema (.dark)
+   - Base styles yang udah ada
+
+   Kalo ada masalah atau mau nambah fitur, diskusi dulu ya! 🙏
+   ============================================================================ */

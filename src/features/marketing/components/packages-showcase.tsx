@@ -91,11 +91,16 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
                 {pkg.title}
               </Heading>
             </div>
+
             <Badge
-              variant={index === 0 ? "secondary" : "default"}
-              className="font-medium text-white"
+              variant={
+                pkg.popular ? "secondary" :
+                  pkg.price === 0 ? "success" :
+                    "default"
+              }
+              className="font-medium"
             >
-              {pkg.badge || (index === 0 ? "Gratis!" : "Premium!")}
+              {pkg.badge || (pkg.price === 0 ? "Gratis!" : "Premium!")}
             </Badge>
           </div>
 
@@ -104,12 +109,11 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
           </Text>
         </div>
 
-        {/* Price */}
+        {/* Price Display - No changes needed */}
         <PriceDisplay price={pkg.price} originalPrice={pkg.originalPrice} />
 
-        {/* Features */}
+        {/* Features List - No changes needed */}
         <div className="border-t border-border flex-1 pt-6 space-y-4">
-          {/* Melakukan iterasi dari MASTER_FEATURES */}
           {MASTER_FEATURES.map((feature) => {
             const isIncluded = pkg.includedFeatureIds.includes(feature.id);
             const featureText = pkg.featureDescriptions[feature.id] || feature.text;
@@ -129,11 +133,12 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
           })}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button - Always use primary brand for consistency */}
         <div className="pt-4">
           <Button
             className="w-full group"
             size="lg"
+            variant="default"  // ✅ Always primary brand
             animation="hover"
           >
             {pkg.price === 0 ? 'Coba Gratis' : 'Pilih Paket'}

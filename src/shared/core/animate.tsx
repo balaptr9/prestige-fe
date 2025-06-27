@@ -60,7 +60,7 @@ export const Animate = ({
                           duration = 0.6,
                           className,
                           threshold = 0.1,
-                          triggerOnce = false, // ✨ PERUBAHAN DI SINI
+                          triggerOnce = true,
                           stagger = false,
                           staggerDelay = 0.1,
                           as = 'div',

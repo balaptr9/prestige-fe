@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Section } from '@/shared/core/section';
 import { Card } from '@/shared/components/ui/card';
 import { Button } from '@/shared/components/ui/button';
+import { Badge } from '@/shared/components/ui/badge'; // ✅ Added import
 import { Heading, Text } from '@/shared/core/typography';
 import { Animate } from '@/shared/core/animate';
 import { motion } from 'framer-motion';
@@ -131,11 +132,16 @@ const TestimonialsSection = () => {
                         variant="default"
                         className="relative w-full mb-8 rounded-3xl card-interactive"
                       >
-                        {/* Position Badge - sekarang berada dalam area yang aman */}
+                        {/* ✅ FIXED: Position Badge - Using Badge component */}
                         <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-10">
-                          <div className="bg-primary text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full whitespace-nowrap shadow-soft shadow-primary/20">
+                          <Badge
+                            variant="default"
+                            size="sm"
+                            animation="glow"
+                            className="text-xs sm:text-sm font-semibold whitespace-nowrap shadow-soft shadow-primary/20"
+                          >
                             {testimonial.position}
-                          </div>
+                          </Badge>
                         </div>
 
                         <div className="h-[350px]">
@@ -150,11 +156,15 @@ const TestimonialsSection = () => {
                             />
                           </div>
 
-                          {/* Name Badge */}
+                          {/* ✅ FIXED: Name Badge - Using Badge component */}
                           <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 z-10">
-                            <div className="bg-card text-card-foreground text-sm font-bold px-5 py-3 rounded-full whitespace-nowrap shadow-soft border">
+                            <Badge
+                              variant="outline"
+                              size="default"
+                              className="bg-card text-card-foreground font-bold px-5 py-3 shadow-soft border border-border"
+                            >
                               {testimonial.name}
-                            </div>
+                            </Badge>
                           </div>
                         </div>
                       </Card>
