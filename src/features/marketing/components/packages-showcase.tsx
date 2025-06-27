@@ -47,7 +47,7 @@ const PriceDisplay = ({ price, originalPrice }: { price: number; originalPrice?:
       )}
     </div>
     {originalPrice && originalPrice > price && (
-      <Badge variant="destructive" className="text-xs">
+      <Badge variant="error" className="text-xs">
         Hemat {Math.round(((originalPrice - price) / originalPrice) * 100)}%
       </Badge>
     )}
@@ -109,10 +109,10 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
           </Text>
         </div>
 
-        {/* Price Display - No changes needed */}
+        {/* Price Display */}
         <PriceDisplay price={pkg.price} originalPrice={pkg.originalPrice} />
 
-        {/* Features List - No changes needed */}
+        {/* Features List */}
         <div className="border-t border-border flex-1 pt-6 space-y-4">
           {MASTER_FEATURES.map((feature) => {
             const isIncluded = pkg.includedFeatureIds.includes(feature.id);
@@ -207,7 +207,7 @@ const PackagesSection = () => {
     >
       <div className="space-y-16">
         {/* Header - Typography selaras dengan section lainnya */}
-        <Animate animation="fadeInUp" className="text-center space-y-4">
+        <Animate animation="fadeInUp" speed="normal" className="text-center space-y-4">
           <Heading
             as="h2"
             size="display-md"
@@ -216,7 +216,7 @@ const PackagesSection = () => {
             align="center"
           >
             <span className="text-3xl sm:text-4xl md:text-4xl">
-              Pilih Paket Belajar    Terbaik
+              Pilih Paket Belajar Terbaik
             </span>
           </Heading>
           <Text size="md" variant="muted" align="center" className="max-w-3xl mx-auto">
@@ -227,18 +227,24 @@ const PackagesSection = () => {
         {/* Packages Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {packages.map((pkg, index) => (
-            <Animate key={pkg.id} animation="fadeInUp" delay={index * 0.1}>
+            // ✅ SELARAS - Semantic delay calculation
+            <Animate
+              key={pkg.id}
+              animation="fadeInUp"
+              speed="normal"
+              delay={index === 0 ? "instant" : index === 1 ? "fast" : "normal"}
+            >
               <PackageCard pkg={pkg} index={index} />
             </Animate>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center animate-fade-in-up">
+        <Animate animation="fadeInUp" speed="normal" delay="fast" className="text-center">
           <Text size="sm" variant="muted" className="mb-4">
             *Syarat dan ketentuan berlaku. Garansi berlaku dengan ketentuan tertentu.
           </Text>
-        </div>
+        </Animate>
       </div>
     </Section>
   );

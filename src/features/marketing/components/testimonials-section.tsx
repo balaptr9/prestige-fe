@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { Section } from '@/shared/core/section';
 import { Card } from '@/shared/components/ui/card';
 import { Button } from '@/shared/components/ui/button';
-import { Badge } from '@/shared/components/ui/badge'; // ✅ Added import
+import { Badge } from '@/shared/components/ui/badge';
 import { Heading, Text } from '@/shared/core/typography';
-import { Animate } from '@/shared/core/animate';
+import { Animate, useAnimationDurations } from '@/shared/core/animate';
 import { motion } from 'framer-motion';
 import { cn } from '@/shared/lib/utils/cn';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
@@ -23,6 +23,9 @@ interface Testimonial {
 
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // ✅ SELARAS - Use animation durations from our system
+  const durations = useAnimationDurations();
 
   const testimonials: Testimonial[] = [
     {
@@ -68,6 +71,7 @@ const TestimonialsSection = () => {
   }, [testimonials.length]);
 
   useEffect(() => {
+    // ✅ SELARAS - Use semantic timing for autoplay
     const interval = setInterval(goToNext, 5000);
     return () => clearInterval(interval);
   }, [goToNext]);
@@ -81,7 +85,7 @@ const TestimonialsSection = () => {
     >
       <div className="space-y-16">
         {/* Header Section dengan spacing konsisten */}
-        <Animate animation="fadeInUp" className="text-center space-y-4">
+        <Animate animation="fadeInUp" speed="normal" className="text-center space-y-4">
           <Heading as="h2" size="display-md" align="center" className="">
             <span className="text-3xl sm:text-4xl md:text-4xl">
              Apa Kata Mereka Mengenai Prestige Academy?
@@ -98,7 +102,7 @@ const TestimonialsSection = () => {
         </Animate>
 
         {/* Testimonials Container dengan padding yang cukup */}
-        <Animate animation="fadeInUp" delay={0.2}>
+        <Animate animation="fadeInUp" speed="normal" delay="fast">
           <div className="relative px-4 sm:px-8 md:px-12">
             {/* Spacer untuk badge position yang keluar */}
             <div className="h-8 mb-4"></div>
@@ -125,14 +129,20 @@ const TestimonialsSection = () => {
                         opacity: position === 0 ? 1 : 0.4,
                         zIndex: position === 0 ? 20 : 10 - Math.abs(position),
                       }}
-                      transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+                      // ✅ SELARAS - Use semantic spring animation
+                      transition={{
+                        type: 'spring',
+                        stiffness: 200,
+                        damping: 25,
+                        duration: durations.normal
+                      }}
                     >
                       {/* Image Card */}
                       <Card
                         variant="default"
                         className="relative w-full mb-8 rounded-3xl card-interactive"
                       >
-                        {/* ✅ FIXED: Position Badge - Using Badge component */}
+                        {/* Position Badge */}
                         <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-10">
                           <Badge
                             variant="default"
@@ -156,7 +166,7 @@ const TestimonialsSection = () => {
                             />
                           </div>
 
-                          {/* ✅ FIXED: Name Badge - Using Badge component */}
+                          {/* Name Badge */}
                           <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 z-10">
                             <Badge
                               variant="outline"

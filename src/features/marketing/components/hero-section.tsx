@@ -5,29 +5,17 @@ import { Heading, Text } from '@/shared/core/typography';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Animate } from '@/shared/core/animate';
-import { motion } from 'framer-motion';
 
 export function HeroSection() {
-  const fadeInLeft = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0 },
-  };
-
-  const fadeInRight = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0 },
-  };
-
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-16">
       {/* Background Assets */}
       <div className="absolute inset-0 z-0">
-        <motion.div
+        <Animate
+          animation="fadeInLeft"
+          speed="slow"
+          delay="normal"
           className="absolute bottom-0 left-0 w-[48vw] h-full hidden lg:block"
-          variants={fadeInLeft}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 1, delay: 0.3 }}
         >
           <Image
             src="/images/backgrounds/hero-asset-left.svg"
@@ -36,15 +24,14 @@ export function HeroSection() {
             className="object-contain object-bottom"
             sizes="42vw"
           />
-        </motion.div>
+        </Animate>
 
         {/* Right Asset - diperbesar untuk mobile/tablet saja */}
-        <motion.div
+        <Animate
+          animation="fadeInRight"
+          speed="slow"
+          delay="normal"
           className="absolute bottom-0 right-0 w-[75vw] sm:w-[65vw] md:w-[55vw] lg:w-[48vw] h-full"
-          variants={fadeInRight}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 1, delay: 0.3 }}
         >
           <Image
             src="/images/backgrounds/hero-asset-right.svg"
@@ -54,7 +41,7 @@ export function HeroSection() {
             priority
             sizes="(min-width: 1024px) 45vw, (min-width: 768px) 55vw, (min-width: 640px) 65vw, 75vw"
           />
-        </motion.div>
+        </Animate>
       </div>
 
       {/* Main Content - Layout TETAP SAMA untuk lg+ */}
@@ -62,7 +49,12 @@ export function HeroSection() {
         <div className="flex justify-start min-h-[calc(100vh-4rem)] pt-20 pb-8 lg:pl-32">
           <div className="w-full lg:w-[55%] xl:w-[50%]">
 
-            <Animate animation="fadeInUp" duration={0.8} delay={0.5} className="mb-8">
+            <Animate
+              animation="fadeInUp"
+              speed="normal"
+              delay="slow"
+              className="mb-8"
+            >
               <Heading
                 as="h1"
                 size="display-lg"
@@ -75,13 +67,19 @@ export function HeroSection() {
                   Impian{' '}
                   <span className="relative text-primary font-bold text-3xl sm:text-4xl md:text-5xl">
                     CPNS!
+                    {/* ✅ SELARAS - Using CSS animation with semantic timing */}
                     <div className="absolute bottom-0 left-0 w-full h-1 sm:h-1.5 lg:h-1.5 bg-secondary rounded-full origin-left animate-wipe-in-right animation-delay-1000"></div>
                   </span>
                 </span>
               </Heading>
             </Animate>
 
-            <Animate animation="fadeInUp" duration={0.8} delay={0.7} className="mb-6">
+            <Animate
+              animation="fadeInUp"
+              speed="normal"
+              delay="very-slow"
+              className="mb-6"
+            >
               <Text
                 size="md"
                 variant="muted"
@@ -91,7 +89,11 @@ export function HeroSection() {
               </Text>
             </Animate>
 
-            <Animate animation="fadeInUp" duration={0.8} delay={0.9}>
+            <Animate
+              animation="fadeInUp"
+              speed="normal"
+              delay="very-slow"
+            >
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center sm:justify-center md:justify-center lg:justify-start">
                 <Button
                   size="lg"

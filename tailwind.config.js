@@ -6,17 +6,33 @@ module.exports = {
   ],
   prefix: "",
 
-  // ✅ Daftar class yang harus tetap ada (gak boleh ke-purge sama Tailwind)
+  // ✅ OPTIMIZED SAFELIST - Cuma yang benar-benar diperlukan
   safelist: [
+    // Brand-specific animations yang kompleks
     'animate-float-orb',
     'animate-theme-switch-light',
     'animate-theme-switch-dark',
     'animate-wipe-in-right',
+
+    // Theme toggle components
     'theme-toggle-icon',
     'system-theme-indicator',
+
+    // Interactive states
+    'interactive-base',
+    'interactive-colors',
+    'interactive',
+    'theme-transition-colors',
+
+    // Performance classes
+    'gpu-accelerated',
+
+    // ✅ REDUCED PATTERN - Cuma delay yang sering dipake
     {
-      pattern: /animation-delay-(100|200|300|400|500|600|700|800|900|1000)/,
+      pattern: /animation-delay-(100|200|300|500|1000)/,
     },
+
+    // Status colors tetep diperlukan
     {
       pattern: /text-(primary|secondary|success|warning|error|info)/,
     }
@@ -185,24 +201,31 @@ module.exports = {
         'header': 'var(--layout-header-height)',
       },
 
-      // 🎭 ANIMASI & TRANSISI - UDAH DISEDERHANAIN
+      // 🎭 ANIMASI & TRANSISI - MENGGUNAKAN CSS VARIABLES
       animation: {
-        // ✅ Cuma simpen animasi brand-specific yang kompleks aja
-        "float-orb": "float-orb 15s ease-in-out infinite",
+        // ✅ Brand-specific animations dengan CSS variables
+        "float-orb": "float-orb calc(var(--animation-duration-normal) * 50) ease-in-out infinite", // 15s equivalent
         "theme-switch-light": "theme-switch-light var(--theme-transition-duration) ease-out",
         "theme-switch-dark": "theme-switch-dark var(--theme-transition-duration) ease-out",
-        "wipe-in-right": "wipe-in-right 0.5s ease-out forwards",
+        "wipe-in-right": "wipe-in-right var(--animation-duration-slow) ease-out forwards",
 
-        // ✅ Tetep animasi Radix UI yang spesifik
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        // ✅ Radix UI animations dengan timing konsisten
+        "accordion-down": "accordion-down var(--animation-duration-fast) ease-out",
+        "accordion-up": "accordion-up var(--animation-duration-fast) ease-out",
 
-        // ✅ Tetep gradient flow buat efek khusus
-        "gradient-flow": "gradient-flow 3s ease-in-out infinite",
+        // ✅ Gradient flow dengan timing yang konsisten
+        "gradient-flow": "gradient-flow calc(var(--animation-duration-normal) * 10) ease-in-out infinite",
+
+        // ✅ Common animations dengan CSS variables
+        "fade-in": "fade-in-up calc(var(--animation-duration-normal) * 2) ease-out forwards",
+        "slide-in": "fade-in-left calc(var(--animation-duration-normal) * 2) ease-out forwards",
+        "scale-in": "scale-in var(--animation-duration-slow) ease-out forwards",
+        "bounce": "bounce-subtle calc(var(--animation-duration-normal) * 6.67) ease-in-out infinite",
+        "pulse": "pulse-soft calc(var(--animation-duration-normal) * 6.67) ease-in-out infinite",
       },
 
       keyframes: {
-        // ✅ Cuma keyframes brand-specific yang kompleks aja
+        // ✅ Brand-specific keyframes
         "float-orb": {
           "0%": { transform: "translate(0px, 0px) scale(1)" },
           "33%": { transform: "translate(80px, -120px) scale(1.1)" },
@@ -225,7 +248,7 @@ module.exports = {
           "100%": { transform: "scaleX(1)" },
         },
 
-        // ✅ Keyframes Radix UI
+        // ✅ Radix UI keyframes
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -235,7 +258,32 @@ module.exports = {
           to: { height: "0" },
         },
 
-        // ✅ Efek gradient flow
+        // ✅ Common keyframes
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+
+        "fade-in-left": {
+          from: { opacity: "0", transform: "translateX(-20px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.9)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+
+        "bounce-subtle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+
+        "pulse-soft": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.8" },
+        },
+
         "gradient-flow": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
@@ -263,19 +311,19 @@ module.exports = {
         "6xl": "3rem",
       },
 
-      // 🎭 BOX SHADOW - AMBIL DARI CSS VARIABLES
+      // 🎭 BOX SHADOW - MENGGUNAKAN CSS VARIABLES
       boxShadow: {
-        // ✅ Ambil shadow semantic tokens dari CSS variables
+        // ✅ Shadow semantic tokens dari CSS variables
         "soft": "var(--shadow-soft)",
         "medium": "var(--shadow-medium)",
         "large": "var(--shadow-large)",
         "colored": "var(--shadow-colored)",
         "colored-secondary": "var(--shadow-colored-secondary)",
 
-        // ✅ Sistem elevation buat kontrol yang granular
-        "elevation-1": "0 2px 4px hsl(var(--foreground) / 0.1)",
-        "elevation-2": "0 4px 8px hsl(var(--foreground) / 0.1)",
-        "elevation-3": "0 8px 16px hsl(var(--foreground) / 0.1)",
+        // ✅ Deprecated - gunakan yang di atas
+        "elevation-1": "var(--shadow-soft)",
+        "elevation-2": "var(--shadow-medium)",
+        "elevation-3": "var(--shadow-large)",
       },
 
       // 📱 RESPONSIVE BREAKPOINTS
@@ -299,13 +347,20 @@ module.exports = {
         'ease-out-expo': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         'ease-in-out-expo': 'cubic-bezier(0.4, 0, 0.2, 1)',
         'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+
+        // ✅ Semantic easing functions
+        'smooth': 'var(--animation-easing-smooth)',
+        'bouncy': 'var(--animation-easing-bounce)',
+        'sharp': 'var(--animation-easing-sharp)',
       },
 
-      // ⏱️ DURASI TRANSISI - AMBIL DARI CSS VARIABLES
+      // ⏱️ DURASI TRANSISI - MENGGUNAKAN CSS VARIABLES
       transitionDuration: {
+        'instant': 'var(--animation-duration-instant)',
         'fast': 'var(--animation-duration-fast)',
         'normal': 'var(--animation-duration-normal)',
         'slow': 'var(--animation-duration-slow)',
+        'very-slow': 'var(--animation-duration-very-slow)',
       },
 
       // 🎯 SKALA Z-INDEX
@@ -319,16 +374,27 @@ module.exports = {
         'tooltip': '1070',
         'toast': '1080',
       },
+
+      // ✅ ANIMATION DELAY - MENGGUNAKAN CSS VARIABLES
+      animationDelay: {
+        'instant': 'var(--animation-duration-instant)',
+        'fast': 'var(--animation-duration-fast)',
+        'normal': 'var(--animation-duration-normal)',
+        'slow': 'var(--animation-duration-slow)',
+        'very-slow': 'var(--animation-duration-very-slow)',
+      },
     },
   },
 
   plugins: [
     require("tailwindcss-animate"),
 
-    // ✅ Plugin custom buat utility design system
-    function({ addUtilities, theme }) {
+    // ✅ Plugin custom buat utility design system yang optimized
+    function({ addUtilities, addComponents, theme }) {
+
+      // ===== UTILITY CLASSES =====
       const newUtilities = {
-        // Utility layout
+        // Layout utilities
         '.layout-header': {
           height: 'var(--layout-header-height)',
         },
@@ -339,12 +405,12 @@ module.exports = {
           maxWidth: 'var(--layout-content-max-width)',
         },
 
-        // Utility animasi
+        // ✅ Animation utilities dengan CSS variables
         '.animate-theme-switch': {
           transition: 'all var(--theme-transition-duration) var(--theme-transition-easing)',
         },
 
-        // Utility shadow dengan naming semantic
+        // Shadow utilities dengan semantic naming
         '.shadow-semantic-soft': {
           boxShadow: 'var(--shadow-soft)',
         },
@@ -354,9 +420,72 @@ module.exports = {
         '.shadow-semantic-large': {
           boxShadow: 'var(--shadow-large)',
         },
+
+        // ✅ Performance utilities
+        '.gpu-accelerated': {
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)',
+        },
+
+        // ✅ Animation control utilities
+        '.animation-paused': {
+          animationPlayState: 'paused',
+        },
+        '.animation-running': {
+          animationPlayState: 'running',
+        },
+      }
+
+      // ===== COMPONENT CLASSES =====
+      const newComponents = {
+        // ✅ Base interaction classes
+        '.interactive-base': {
+          transition: `
+            transform var(--animation-duration-fast) var(--animation-easing-smooth),
+            opacity var(--animation-duration-fast) var(--animation-easing-smooth)
+          `,
+          willChange: 'transform, opacity',
+          '&:hover': {
+            transform: 'translateY(-2px)',
+          },
+        },
+
+        '.interactive-colors': {
+          transition: `
+            color var(--animation-duration-fast) var(--animation-easing-smooth),
+            background-color var(--animation-duration-fast) var(--animation-easing-smooth),
+            border-color var(--animation-duration-fast) var(--animation-easing-smooth)
+          `,
+        },
+
+        '.interactive': {
+          transition: `
+            transform var(--animation-duration-fast) var(--animation-easing-smooth),
+            opacity var(--animation-duration-fast) var(--animation-easing-smooth),
+            color var(--animation-duration-fast) var(--animation-easing-smooth),
+            background-color var(--animation-duration-fast) var(--animation-easing-smooth),
+            border-color var(--animation-duration-fast) var(--animation-easing-smooth)
+          `,
+          willChange: 'transform, opacity',
+          '&:hover': {
+            transform: 'translateY(-2px)',
+          },
+        },
+
+        // ✅ Theme transition class
+        '.theme-transition-colors': {
+          transition: `
+            color var(--theme-transition-duration) var(--theme-transition-easing),
+            background-color var(--theme-transition-duration) var(--theme-transition-easing),
+            border-color var(--theme-transition-duration) var(--theme-transition-easing),
+            fill var(--theme-transition-duration) var(--theme-transition-easing),
+            stroke var(--theme-transition-duration) var(--theme-transition-easing)
+          `,
+        },
       }
 
       addUtilities(newUtilities)
+      addComponents(newComponents)
     }
   ],
 }

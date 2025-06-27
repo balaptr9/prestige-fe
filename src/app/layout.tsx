@@ -1,21 +1,11 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { fontVariables } from '@/lib/fonts'
 import './globals.css'
-import { ClientProviders } from '@/shared/providers/client-providers'
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Prestige Academy - Platform Tryout CASN Terpercaya',
-    template: '%s | Prestige Academy'
-  },
-  description: 'Platform tryout online untuk persiapan ujian CASN dengan sistem CAT yang terintegrasi',
+  title: 'Prestige Academy - Platform Tryout Terpercaya',
+  description: 'Platform tryout online terpercaya untuk persiapan ujian CASN dengan sistem CAT yang terintegrasi',
+  keywords: ['tryout', 'CASN', 'CPNS', 'PPPK', 'CAT', 'ujian online'],
 }
 
 export default function RootLayout({
@@ -24,11 +14,26 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="id" suppressHydrationWarning>
-    <body className={`${poppins.variable} font-sans antialiased`}>
-    <ClientProviders>
-      {children}
-    </ClientProviders>
+    <html lang="id" className="theme-transitions">
+    <head>
+      {/* ✅ DNS prefetch untuk performance */}
+      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+
+      {/* ✅ Preconnect untuk font loading optimization */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    </head>
+    <body
+      className={`
+          ${fontVariables} 
+          font-sans 
+          antialiased 
+          theme-transition-colors
+          bg-background 
+          text-foreground
+        `}
+    >
+    {children}
     </body>
     </html>
   )
